@@ -1,9 +1,10 @@
-require('nightfox').setup({
+require('tokyonight').setup({
     options = {
         transparent = false,
     },
 })
 
-vim.cmd.colorscheme("terafox")
+vim.cmd.colorscheme("tokyonight-night")
+
 
 
