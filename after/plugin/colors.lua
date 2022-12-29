@@ -1,2 +1,9 @@
-vim.cmd[[colorscheme duskfox]]
+require('nightfox').setup({
+    options = {
+        transparent = false,
+    },
+})
+
+vim.cmd.colorscheme("terafox")
+
 
