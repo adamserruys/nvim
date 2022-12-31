@@ -1,10 +1,3 @@
-require('tokyonight').setup({
-    options = {
-        transparent = false,
-    },
-})
-
-vim.cmd.colorscheme("tokyonight-night")
-
-
-
+require('zenbones')
+vim.cmd.colorscheme("rosebones")
+vim.g.rosebones = { darkness = 'stark' }

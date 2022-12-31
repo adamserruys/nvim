@@ -13,8 +13,10 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
   use { "nvim-telescope/telescope-file-browser.nvim" }
-
-  use ('folke/tokyonight.nvim')
+  use {
+      "mcchrish/zenbones.nvim",
+      requires = "rktjmp/lush.nvim"
+  }
   use ('mbbill/undotree')
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use {
