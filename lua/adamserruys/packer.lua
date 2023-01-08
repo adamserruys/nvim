@@ -46,5 +46,5 @@ return require('packer').startup(function(use)
   }
   use ('windwp/nvim-autopairs')
   use ('windwp/nvim-ts-autotag')
-
+  use ('ThePrimeagen/vim-be-good')
 end)
