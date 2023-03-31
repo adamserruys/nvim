@@ -5,4 +5,5 @@ If I can stay determined to start using Vim as my code editing paradigm of choic
 
 ## Pre-Reqs
 - Neovim
-- [ripgrep](https://github.com/BurntSushi/ripgrep).
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- Lua Language Server
