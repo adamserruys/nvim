@@ -1,11 +1,14 @@
-local lsp = require('lsp-zero')
+local status, lsp = pcall(require,'lsp-zero')
+if (not status) then return end
 
-lsp.preset({  
-  name = 'minimal',
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
-  suggest_lsp_servers = false,
-})
+--lsp.preset({
+ --name = 'minimal',
+ --set_lsp_keymaps = true,
+ --manage_nvim_cmp = true,
+ --suggest_lsp_servers = false,
+--})
+
+lsp.preset("recommended")
 
 lsp.ensure_installed({
   'tsserver',
@@ -50,11 +53,6 @@ lsp.set_preferences({
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
-  if client.name == "eslint" then
-      vim.cmd.LspStop('eslint')
-      return
-  end
-
   vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -67,9 +65,11 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+lsp.nvim_workspace()
+
+lsp.setup()
+
 vim.diagnostic.config({
     virtual_text = true,
 })
-
-lsp.setup()
 
