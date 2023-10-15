@@ -68,7 +68,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -110,10 +110,10 @@ require('lazy').setup({
 
   {
     'mcchrish/zenbones.nvim',
-    dependencies = {'rktjmp/lush.nvim'},
+    dependencies = { 'rktjmp/lush.nvim' },
     config = function()
-      vim.g.rosebones = { darkness = "stark", lighten_line_nr = 69, lighten_comments= 48 }
-      vim.cmd.colorscheme("rosebones")
+      vim.g.rosebones = { darkness = 'stark', lighten_line_nr = 69, lighten_comments = 48 }
+      vim.cmd.colorscheme('rosebones')
     end,
   },
 
@@ -165,8 +165,8 @@ require('lazy').setup({
   },
 
   {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
   },
 
   {
@@ -221,12 +221,14 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
-vim.opt.smartindent = true
+vim.o.smartindent = true
+vim.o.wrap = true 
+vim.o.linebreak = true
 
 -- Save undo history
 vim.o.swapfile = false
 vim.o.backup = false
-vim.o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.o.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.o.undofile = true
 vim.o.updatetime = 50
 
@@ -236,7 +238,7 @@ vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = '80'
 vim.o.scrolloff = 8
 
 -- Decrease update time
@@ -249,7 +251,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.o.guicursor = ""
+vim.o.guicursor = ''
 
 -- [[ Basic Keymaps ]]
 
@@ -261,51 +263,43 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-vim.keymap.set("n", "<leader>sv", "<C-w>v")
-vim.keymap.set("n", "<leader>sh", "<C-w>S")
+vim.keymap.set('n', '<leader>sv', '<C-w>v')
+vim.keymap.set('n', '<leader>sh', '<C-w>S')
 
-vim.keymap.set("n", "<leader>wh", "<C-w>h")
-vim.keymap.set("n", "<leader>wj", "<C-w>j")
-vim.keymap.set("n", "<leader>wk", "<C-w>k")
-vim.keymap.set("n", "<leader>wl", "<C-w>l")
-vim.keymap.set("n", "<leader>tw", "<C-w><C-w>")
+vim.keymap.set('n', '<leader>wh', '<C-w>h')
+vim.keymap.set('n', '<leader>wj', '<C-w>j')
+vim.keymap.set('n', '<leader>wk', '<C-w>k')
+vim.keymap.set('n', '<leader>wl', '<C-w>l')
+vim.keymap.set('n', '<leader>tw', '<C-w><C-w>')
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- greatest remap ever (according to the Primeagen)
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set('x', '<leader>p', [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+vim.keymap.set('n', '<leader>Y', [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 
-vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
 
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
+vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+vim.keymap.set('n', '<leader>1', require('harpoon.ui').nav_next)
+vim.keymap.set('n', '<leader>2', require('harpoon.ui').nav_prev)
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
-vim.keymap.set("n", "<leader>ha", require('harpoon.mark').add_file)
-vim.keymap.set("n", "<C-e>", require('harpoon.ui').toggle_quick_menu)
-vim.keymap.set("n", "<leader>1", require('harpoon.ui').nav_next)
-vim.keymap.set("n", "<leader>2", require('harpoon.ui').nav_prev)
-
-require('nvim-ts-autotag').setup {}
+require('nvim-ts-autotag').setup()
 require('nvim-autopairs').setup {
-  disable_filetype = { "TelescopePrompt" , "vim" },
+  disable_filetype = { 'TelescopePrompt', 'vim' },
 }
 
 -- [[ Highlight on yank ]]
@@ -329,7 +323,7 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
       n = {
-        ["q"] = require('telescope.actions').close
+        ['q'] = require('telescope.actions').close
       },
     },
   },
@@ -343,9 +337,6 @@ require('telescope').setup {
           -- your custom normal mode mappings
           ['N'] = require('telescope').extensions.file_browser.actions.create,
           ['h'] = require('telescope').extensions.file_browser.actions.goto_parent_dir,
-          ["/"] = function()
-            vim.cmd('startinsert')
-          end
         },
       },
     },
@@ -369,13 +360,13 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>fe', function()
   require('telescope').extensions.file_browser.file_browser({
-    path = "%:p:h",
+    path = '%:p:h',
     cwd = vim.fn.expand('%:p:h'),
     respect_gitignore = false,
     hidden = true,
     grouped = true,
     previewer = false,
-    initial_mode = "normal",
+    initial_mode = 'normal',
     layout_config = { height = 40 }
   })
 end, { desc = 'Open [F]ile [E]xplorer' })
@@ -494,14 +485,6 @@ local on_attach = function(_, bufnr)
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- Lesser used LSP functionality
-  -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  -- nmap('<leader>wl', function()
-    -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
- -- end, '[W]orkspace [L]ist Folders')
-
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
@@ -534,10 +517,10 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
