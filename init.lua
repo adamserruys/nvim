@@ -17,11 +17,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -31,6 +26,11 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  'ThePrimeagen/harpoon',
+  'windwp/nvim-ts-autotag',
+  'windwp/nvim-autopairs',
+
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -178,9 +178,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  {
-    'ThePrimeagen/harpoon'
-  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -305,6 +302,11 @@ vim.keymap.set("n", "<leader>ha", require('harpoon.mark').add_file)
 vim.keymap.set("n", "<C-e>", require('harpoon.ui').toggle_quick_menu)
 vim.keymap.set("n", "<leader>1", require('harpoon.ui').nav_next)
 vim.keymap.set("n", "<leader>2", require('harpoon.ui').nav_prev)
+
+require('nvim-ts-autotag').setup {}
+require('nvim-autopairs').setup {
+  disable_filetype = { "TelescopePrompt" , "vim" },
+}
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
