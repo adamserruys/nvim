@@ -30,6 +30,8 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'windwp/nvim-ts-autotag',
   'windwp/nvim-autopairs',
+  'stevearc/conform.nvim',
+  'mfussenegger/nvim-lint',
 
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -222,7 +224,7 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 vim.o.smartindent = true
-vim.o.wrap = true 
+vim.o.wrap = true
 vim.o.linebreak = true
 
 -- Save undo history
@@ -296,6 +298,55 @@ vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
 vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
 vim.keymap.set('n', '<leader>1', require('harpoon.ui').nav_next)
 vim.keymap.set('n', '<leader>2', require('harpoon.ui').nav_prev)
+
+require('conform').setup({
+  formatters_by_ft = {
+    javascript = { 'prettier' },
+    typescript = { 'prettier' },
+    javascriptreact = { 'prettier' },
+    typescriptreact = { 'prettier' },
+    css = { 'prettier' },
+    html = { 'prettier' },
+    json = { 'prettier' },
+    lua = { 'stylua' },
+  },
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+    async = false,
+  },
+
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>mp', function()
+  require('conform').format({
+    lsp_fallback = true,
+    async = false,
+    timeout_ms = 1000,
+  })
+end, { desc = 'Format file or range (in visual mode)' })
+
+require('lint').linters_by_ft = {
+  javascript = { 'eslint_d' },
+  typescript = { 'eslint_d' },
+  javascriptreact = { 'eslint_d' },
+  typescriptreact = { 'eslint_d' },
+}
+
+
+local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+  group = lint_augroup,
+  callback = function()
+    require('lint').try_lint()
+  end,
+})
+
+vim.keymap.set('n', '<leader>l', function()
+  require('lint').try_lint()
+end, { desc = 'Trigger linting for current file' })
 
 require('nvim-ts-autotag').setup()
 require('nvim-autopairs').setup {
@@ -385,7 +436,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
+      'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
