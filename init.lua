@@ -303,7 +303,7 @@ vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
 
 vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
-vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+vim.keymap.set('n', '<leader>he', require('harpoon.ui').toggle_quick_menu)
 vim.keymap.set('n', '<leader>1', require('harpoon.ui').nav_next)
 vim.keymap.set('n', '<leader>2', require('harpoon.ui').nav_prev)
 
@@ -437,6 +437,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
